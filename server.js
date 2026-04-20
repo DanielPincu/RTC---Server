@@ -1,6 +1,9 @@
 const { WebSocketServer } = require('ws')
+const http = require('http')
 
-const wss = new WebSocketServer({ port: 3000 })
+const server = http.createServer((req, res) => res.end('ok'))
+
+const wss = new WebSocketServer({ server })
 
 let waiting = null
 
@@ -35,4 +38,5 @@ wss.on('connection', (ws) => {
   })
 })
 
+server.listen(3000)
 console.log('ws://localhost:3000')
